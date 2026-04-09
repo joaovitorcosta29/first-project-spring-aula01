@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class UsuarioController {
     @GetMapping("/perfil")
     public String perfil(Model model){
-        model.addAttribute("nome", "João Vitor Costa");
-        model.addAttribute("curso", "Técnico em Desenvolvimento de Sistemas");// primeiro varivel e o segundo é valor
-        model.addAttribute("Linguagem", "Java");
+        model.addAttribute("nome", "João Vitor Costa Lima");// primeiro varivel nome e o segundo é valor
+        model.addAttribute("curso", "Técnico em Desenvolvimento de Sistemas");
+        model.addAttribute("linguagemFavorita", "Java");
         return "perfil";
     }
 }
