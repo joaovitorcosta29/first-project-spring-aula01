@@ -23,7 +23,7 @@ public class FuncionarioDAO {
             PreparedStatement stmt = null; //caminho pro banco de dados
             ResultSet rs = null; //retorno do banco de dados
             
-            stmt = conn.prepareStatement("SELECT * FROM funcionarios");
+            stmt = conn.prepareStatement("SELECT * FROM funcionario");
             rs = stmt.executeQuery();
             
             while(rs.next()){
@@ -42,5 +42,48 @@ public class FuncionarioDAO {
             e.printStackTrace();
         }
         return lista;
+    }
+    public int totalFuncionarios(){
+        int total = 0;
+        try{
+            Connection conn = Conexao.conectar();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            
+            stmt = conn.prepareStatement("SELECT COUNT(*) as total FROM funcionario");
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
+            total = rs.getInt("total");
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return total;
+    }
+    public List<FuncionarioBean> tecnologia(){
+        List<FuncionarioBean> listaFiltrada = new ArrayList();
+        try{
+            Connection conn = Conexao.conectar();
+            PreparedStatement stmt = null; //caminho pro banco de dados
+            ResultSet rs = null; //retorno do banco de dados
+            
+            stmt = conn.prepareStatement("SELECT * FROM funcionario WHERE departamento = 'Tecnologia'");
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                FuncionarioBean funcionarioFiltrado = new FuncionarioBean();
+                funcionarioFiltrado.setId(rs.getInt("id"));
+                funcionarioFiltrado.setNome(rs.getString("nome"));
+                funcionarioFiltrado.setDepartamento(rs.getString("departamento"));
+                listaFiltrada.add(funcionarioFiltrado);
+            }
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return listaFiltrada;
+     
     }
 }
